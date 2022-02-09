@@ -12,4 +12,8 @@ export class SingleTodoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onBack() {
+
+  }
+
 }

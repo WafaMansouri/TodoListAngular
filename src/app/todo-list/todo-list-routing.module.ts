@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { SingleTodoComponent } from "./single-todo/single-todo.component";
 import { TodoListComponent } from "./todo-list.component";
-console.log("oooooooooo");
 
 const todosRoutes: Routes = [
     {path: '', component: TodoListComponent},

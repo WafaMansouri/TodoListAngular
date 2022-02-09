@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
@@ -12,7 +13,8 @@ export class HeaderComponent implements OnInit {
   isAuth!: boolean
   authSubscription!: Subscription
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.authSubscription = this.authService.authSubject.subscribe(
@@ -23,6 +25,7 @@ export class HeaderComponent implements OnInit {
 
   onSignOut() {
     this.authService.signOut()
+    this.authService.emitAuthSubject()
+    this.router.navigate(["/auth/signin"])
   }
-
 }

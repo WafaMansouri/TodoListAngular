@@ -4,9 +4,6 @@ import { SingleTodoComponent } from './single-todo/single-todo.component';
 import { TodoListComponent } from './todo-list.component';
 import { TodoRoutingModule } from './todo-list-routing.module';
 
-
-console.log("yyyyyyyyy");
-
 @NgModule({
   declarations: [
     TodoListComponent,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class SignUpComponent implements OnInit {
   errorMessage!: string
 
   constructor(private formBuilder: FormBuilder,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.initForm()
@@ -27,7 +29,15 @@ export class SignUpComponent implements OnInit {
   }
 
   onSignUp() {
-    this.authService.signUp()
+    const email = this.signUpForm.get('email')?.value;
+    const password = this.signUpForm.get('password')?.value;
+    this.authService.signUp(email, password).then(
+      () => {
+        this.router.navigate(['/todos'])
+      },
+      (error) => {
+        this.errorMessage = error
+      }
+    )
   }
-
 }

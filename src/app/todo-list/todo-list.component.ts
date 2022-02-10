@@ -34,8 +34,16 @@ export class TodoListComponent implements OnInit {
     this.router.navigate([`todos/view/${id}`])
   }
 
-  onDeleteTodo(todo: any) {
+  onDeleteTodo(todo: Todo) {
     this.todoService.deleteTodo(todo.id).then(
+      () => {
+        this.router.navigate(['/todos'])
+      }
+    )
+  }
+
+  onDoneTodo(todo: Todo) {
+    this.todoService.doneTodo({...todo, done: true}).then(
       () => {
         this.router.navigate(['/todos'])
       }

@@ -17,7 +17,7 @@ export class SingleTodoComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.todo = new Todo('', '', new Date())
+    this.todo = new Todo('', '', new Date(), false)
     const id = this.route.snapshot.params['id']
     this.todoService.getSingleTodo(+id).then(
       (todo: Todo) => {

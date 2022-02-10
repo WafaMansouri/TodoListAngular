@@ -3,10 +3,13 @@
         <h2>My TODOS</h2>
         <div class="list-group">
             <button class="list-group-item" *ngFor="let todo of todos; let i=index" (click)=onViewTodo(i)>
-                <h3 class="list-group-item-heading">
+                <h3  class="list-group-item-heading" [ngClass]= "{done: todo.done===true}">
                     {{todo.title}}
                     <button class="btn btn-default pull-right" (click)="onDeleteTodo(todo)">
                         <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                    <button class="btn btn-default pull-right" (click)="onDoneTodo(todo)">
+                        <span class="glyphicon glyphicon-check"></span>
                     </button>
                 </h3>
                 <p class="list-group-item-text">{{todo.createdDate |date : 'EEEE, d MMMM y à HH:mm'}}</p>

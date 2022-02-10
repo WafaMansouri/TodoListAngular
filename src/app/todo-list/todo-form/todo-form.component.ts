@@ -32,7 +32,7 @@ export class TodoFormComponent implements OnInit {
     const title = this.todoForm.get('title')?.value;
     const description = this.todoForm.get('description')?.value;
     const createdDate = new Date()
-    const newTodo = new Todo(title, description, createdDate)
+    const newTodo = new Todo(title, description, createdDate, false)
     this.todoService.createNewTodo(newTodo).then(
       ()=> {
         this.router.navigate(["/todos"])

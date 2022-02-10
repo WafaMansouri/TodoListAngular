@@ -16,7 +16,7 @@ export class TodoService {
     this.todosSubject.next(this.todos)
   }
 
-  createNewTodo(newTodo: any) {
+  createNewTodo(newTodo: Todo) {
     return new Promise(
       (resolve, reject) => {
         this.httpClient.post("https://todo-list-ee9e5-default-rtdb.europe-west1.firebasedatabase.app/todos.json", newTodo)
@@ -38,13 +38,15 @@ export class TodoService {
       (resolve, reject) => {
         this.httpClient.get("https://todo-list-ee9e5-default-rtdb.europe-west1.firebasedatabase.app/todos.json")
                         .subscribe({
-                          next: (response: any) => {
+                          next: (response: any) => {console.log("gg",response);
+                          
                             for (let i in response) {
                              this.todos.push({
                                id: i,
                                title: response[i].title,
                                description: response[i].description,
-                               createdDate: response[i].createdDate
+                               createdDate: response[i].createdDate,
+                               done: response[i].done,
                              })
                             }
                             this.emitTodos()
@@ -70,7 +72,6 @@ export class TodoService {
   deleteTodo(id: string) {
     return new Promise(
       (resolve, reject) => {
-      
         this.httpClient.delete(`https://todo-list-ee9e5-default-rtdb.europe-west1.firebasedatabase.app/todos/${id}.json`)
                         .subscribe({
                           next: (res)=> {
@@ -80,6 +81,24 @@ export class TodoService {
                             reject(error)
                           }
                         })
+      }
+    )
+  }
+
+  doneTodo(updatedTodo: Todo) {
+    return new Promise(
+      (resolve, reject) => {
+        this.httpClient
+        .put(`https://todo-list-ee9e5-default-rtdb.europe-west1.firebasedatabase.app/todos/${updatedTodo.id}.json`, 
+        updatedTodo)
+        .subscribe({
+          next: (res)=> {
+            resolve(true)
+          },
+          error: (error) => {
+            reject(error)
+          }
+        })
       }
     )
   }

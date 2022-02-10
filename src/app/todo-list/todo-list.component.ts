@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Todo } from '../models/todo.model';
+import { TodoService } from '../services/todo.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,14 +11,34 @@ import { Todo } from '../models/todo.model';
 })
 export class TodoListComponent implements OnInit {
 
-  todos: Todo[] = [{title: "test", description: "testtttt", date: "testt"}]
+  todos!: Todo[]
+  todosSubscription!: Subscription
 
-  constructor() { }
+  constructor(private todoService: TodoService,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.todosSubscription = this.todoService.todosSubject.subscribe(
+      (todos: Todo[]) => {
+        this.todos = todos
+      }
+      )
+      this.todoService.getAllTodos()
   }
 
-  onViewTodo(id: number) {}
+  onAddTodo() {
+    this.router.navigate(['/todos', 'new'])
+  }
 
-  onDeleteBook(todo: any) {}
+  onViewTodo(id: number) {
+    this.router.navigate([`todos/view/${id}`])
+  }
+
+  onDeleteTodo(todo: any) {
+    this.todoService.deleteTodo(todo.id).then(
+      () => {
+        this.router.navigate(['/todos'])
+      }
+    )
+  }
 }

@@ -5,13 +5,13 @@
             <button class="list-group-item" *ngFor="let todo of todos; let i=index" (click)=onViewTodo(i)>
                 <h3 class="list-group-item-heading">
                     {{todo.title}}
-                    <button class="btn btn-default pull-right" (click)="onDeleteBook(todo)">
+                    <button class="btn btn-default pull-right" (click)="onDeleteTodo(todo)">
                         <span class="glyphicon glyphicon-minus"></span>
                     </button>
                 </h3>
-                <p class="list-group-item-text">{{todo.description}}</p>
+                <p class="list-group-item-text">{{todo.createdDate |date : 'EEEE, d MMMM y à HH:mm'}}</p>
             </button>
         </div>
-        <button class="btn btn-primary">Nouveau TODO</button>
+        <button class="btn btn-primary" (click)="onAddTodo()">Nouveau TODO</button>
     </div>
 </div>

@@ -4,6 +4,9 @@
             <li routerLinkActive="active">
                 <a routerLink="todos">My TODOS</a>
             </li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="">Home</a>
+            </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li routerLinkActive="active" *ngIf="!isAuth" >

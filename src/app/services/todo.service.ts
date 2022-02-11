@@ -38,8 +38,7 @@ export class TodoService {
       (resolve, reject) => {
         this.httpClient.get("https://todo-list-ee9e5-default-rtdb.europe-west1.firebasedatabase.app/todos.json")
                         .subscribe({
-                          next: (response: any) => {console.log("gg",response);
-                          
+                          next: (response: any) => {
                             for (let i in response) {
                              this.todos.push({
                                id: i,
@@ -75,6 +74,7 @@ export class TodoService {
         this.httpClient.delete(`https://todo-list-ee9e5-default-rtdb.europe-west1.firebasedatabase.app/todos/${id}.json`)
                         .subscribe({
                           next: (res)=> {
+                            this.getAllTodos()
                             resolve(true)
                           },
                           error: (error) => {
@@ -93,6 +93,7 @@ export class TodoService {
         updatedTodo)
         .subscribe({
           next: (res)=> {
+            this.getAllTodos()
             resolve(true)
           },
           error: (error) => {

@@ -4,7 +4,7 @@
         <div class="list-group">
             <div class="one-todo" *ngFor="let todo of todos; let i=index" >
                 <button class="list-group-item"(click)=onViewTodo(i)>
-                    <h3  class="list-group-item-heading" [ngClass]= "{done: todo.done===true}">
+                    <h3  class="list-group-item-heading" [class.done]= "todo.done===true">
                         {{todo.title}}
                     </h3>
                     <p class="list-group-item-text">{{todo.createdDate |date : 'EEEE, d MMMM y à HH:mm'}}</p>
